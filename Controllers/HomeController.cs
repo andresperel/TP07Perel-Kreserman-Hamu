@@ -15,6 +15,35 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        return RedirectToAction("login", "Account");
     }
+
+    public IActionResult listarTareas()
+    {
+        ViewBag.listaTareas=BD.listarTareas(id);
+        return View("listarTareas");
+    }
+
+    public IActionResult crearTarea(){
+        return View("crearTarea");
+    }
+    public IActionResult crearTareaGuardar(string titulo, string descripcion, DateOnly fecha, bool finalizada){
+        Tarea tarea= new Tarea(titulo ,descripcion, fecha, finalizada, id);
+        BD.crearTarea(tarea, id);
+        return RedirectToAction("listarTareas", "Home");
+    }
+
+    public IActionResult finalizarTarea(int idTarea){
+        BD.finalizarTarea(idTarea);
+        return RedirectToAction("listarTareas", "Home");
+    }
+
+    public IActionResult eliminarTarea(int idTarea){
+        BD.eliminarTarea(idTarea);
+        return RedirectToAction("listarTareas", "Home");
+    }
+    public IActionResult editarTarea(){
+        return View("editarTarea");
+    }
+    public IActionResult 
 }
