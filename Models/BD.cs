@@ -28,8 +28,8 @@ public class BD
             if (usuario == null)
             {
 
-                  string query2 = "INSERT INTO  usuarios (username,password,nombre,apellido,foto,ultimoLogin) VALUES (@username,@password,@nombre,@apellido,@foto,@ultimoLogin)";
-            usuario = connection.QueryFirstOrDefault<Usuario>(query2, new { username = usuario.username, password = usuario.password,nombre=usuario.nombre,apellido=usuario.apellido,foto=usuario.foto,ultimoLogin=usuario.ultimoLogin });
+                string query2 = "INSERT INTO  usuarios (username,password,nombre,apellido,foto,ultimoLogin) VALUES (@username,@password,@nombre,@apellido,@foto,@ultimoLogin)";
+                usuario = connection.QueryFirstOrDefault<Usuario>(query2, new { username = usuario.username, password = usuario.password,nombre=usuario.nombre,apellido=usuario.apellido,foto=usuario.foto,ultimoLogin=usuario.ultimoLogin });
 
                 sePudo = true;
             }
@@ -41,12 +41,12 @@ public class BD
     
         public static List<Tarea> listarTareas(int idUsuario)
         {
-            Tarea tarea = new Tarea();
             List<Tarea> listTareas = new List<Tarea>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM Tareas WHERE idUsuario = @idUsuario  ";
-                tarea = connection.QueryFirstOrDefault<Tarea>(query, new { idUsuario });
+                string query = "SELECT * FROM Tareas WHERE idUsuario = @idUsuario";
+                listTareas = connection.Query<Tarea>(query, new { idUsuario }).ToList();
+                
 
             }
             return listTareas;
@@ -106,7 +106,7 @@ public class BD
             {
                 string query = "UPDATE Tareas SET fecha = DateTime.Now() WHERE id = @id  ";
                 tarea = connection.QueryFirstOrDefault<Tarea>(query, new {tarea.id});
-    ;
+                
             }
         }
 

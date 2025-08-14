@@ -20,6 +20,7 @@ public class HomeController : Controller
 
     public IActionResult listarTareas()
     {
+        int id= int.Parse(HttpContext.Session.GetString("id"));
         ViewBag.listaTareas=BD.listarTareas(id);
         return View("listarTareas");
     }
@@ -28,6 +29,7 @@ public class HomeController : Controller
         return View("crearTarea");
     }
     public IActionResult crearTareaGuardar(string titulo, string descripcion, DateOnly fecha, bool finalizada){
+        int id= int.Parse(HttpContext.Session.GetString("id"));
         Tarea tarea= new Tarea(titulo ,descripcion, fecha, finalizada, id);
         BD.crearTarea(tarea, id);
         return RedirectToAction("listarTareas", "Home");
@@ -42,8 +44,17 @@ public class HomeController : Controller
         BD.eliminarTarea(idTarea);
         return RedirectToAction("listarTareas", "Home");
     }
-    public IActionResult editarTarea(){
+    public IActionResult editarTarea(int idTarea){
+        Tarea tarea=BD.traerTareaACambiar(idTarea);
+        ViewBag.titulo=tarea.titulo;
+        ViewBag.descripcion=tarea.descripcion;
+        ViewBag.fecha=tarea.fecha;
+        ViewBag.finalizada=tarea.finalizada;
+        ViewBag.idUsuario=tarea.idUsuario;
         return View("editarTarea");
     }
-    public IActionResult 
+    public IActionResult editarTareaGuardar(string pTitulo, string pDescripcion, DateOnly pFecha, bool pFinalizada, int pIdUsuario)
+    {
+        
+    }
 }
