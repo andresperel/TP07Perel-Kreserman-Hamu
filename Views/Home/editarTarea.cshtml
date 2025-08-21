@@ -2,7 +2,7 @@
     ViewData["Title"] = "editarTarea";
 }
 <section class="editarTarea">
-<form action='@Url.Action("editarTareaGuardar", "Home", new {idTarea=@ViewBag.tarea.id, idUsuario=@ViewBag.tarea.idUsuario})' method="POST" enctype="application/x-www-form-urlencoded">
+<form action='@Url.Action("editarTareaGuardar", "Home", new {idTarea=@ViewBag.tarea.id})' method="POST" enctype="application/x-www-form-urlencoded">
     Título: <input type="text" name="titulo" value=@ViewBag.tarea.titulo/>
     Descripción: <input type="text" name="descripcion" value=@ViewBag.tarea.descripcion/>
     Fecha de finalización: <input type="date" name="fecha" value=@ViewBag.Tarea.fecha/>
