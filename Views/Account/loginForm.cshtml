@@ -1,10 +1,11 @@
 @{
     ViewData["Title"] = "loginForm";
 }
-
+<section class="loginForm">
 <form action='@Url.Action("recibirLogin", "Account")' method="POST" enctype="application/x-www-form-urlencoded">
     Ingrese su nombre de usuario: <input type="text" name="username"/>
     Ingrese su contraseña: <input type="text" name="password"/>
     <input type="submit" value="Guardar"/>
 </form>
   <a href = '@Url.Action("registrarse", "Account")'><h1>Registrarse</h1></a>
+  </section>

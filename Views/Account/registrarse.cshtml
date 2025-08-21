@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "registrarse";
+  <section class="registrarse">
     <form action='@Url.Action("recibirRegistro", "Account")' method="POST" enctype="multipart/form-data">
     Ingrese su nombre de usuario: <input type="text" name="username"/>
     Ingrese su contraseña: <input type="text" name="password"/>
@@ -8,4 +9,6 @@
     Ingrese su foto: <input type="file" name="foto"/>
     <input type="submit" value="Guardar"/>
     </form>
+    <a href = '@Url.Action("login", "Account")'><h1>Log in</h1></a>
+    </section>
 }

@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "listarTareas";
 }
+<section class="listarTareas">
 @foreach(Tarea tarea in ViewBag.listaTareas)
 {
   <h3>titulo: @tarea.titulo</h3>
@@ -14,4 +15,5 @@
 }
   <a href = '@Url.Action("Account", "Home")' alt="Cerrar sesion"><h1>Cerrar sesion</h1></a>
   <a href = '@Url.Action("crearTarea", "Home")' alt="crear tarea"><h1>Crear tarea</h1></a>
+  </section>
 

@@ -53,8 +53,11 @@ public class HomeController : Controller
         ViewBag.idUsuario=tarea.idUsuario;
         return View("editarTarea");
     }
-   /* public IActionResult editarTareaGuardar(string pTitulo, string pDescripcion, DateOnly pFecha, bool pFinalizada, int pIdUsuario)
+/*    public IActionResult editarTareaGuardar(string pTitulo, string pDescripcion, DateOnly pFecha, bool pFinalizada, int pIdUsuario)
     {
-        
-    } */
+        int id= int.Parse(HttpContext.Session.GetString("id"));
+        Tarea tarea= new Tarea(pTitulo ,pDescripcion, pFecha,pFinalizada, pIdUsuario);
+        BD.actualizarTarea(tarea);
+    } 
+*/
 }

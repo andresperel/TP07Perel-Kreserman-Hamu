@@ -3,7 +3,7 @@ using Dapper;
 public class BD
 {
     private static string _connectionString = @"Server=localhost; 
-    DataBase = TP07Perel-Kreserman-Hamu; Integrated Security=True; TrustServerCertificate=True;";
+    DataBase = TP07_KresermanHamuPerel; Integrated Security=True; TrustServerCertificate=True;";
 
     public static int iniciarSesion(string username, string password)
     {
@@ -22,10 +22,8 @@ public class BD
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             bool sePudo = false;
-            string query = "SELECT * FROM usuarios WHERE username = @username";
-            usuario = connection.QueryFirstOrDefault<Usuario>(query, new { username = usuario.username });
-
-            if (usuario == null)
+            
+            if (usuario!= null)
             {
 
                 string query2 = "INSERT INTO  usuarios (username,password,nombre,apellido,foto,ultimoLogin) VALUES (@username,@password,@nombre,@apellido,@foto,@ultimoLogin)";

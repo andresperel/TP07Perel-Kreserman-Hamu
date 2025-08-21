@@ -1,3 +1,15 @@
 @{
     ViewData["Title"] = "editarTarea";
 }
+<section class="editarTarea">
+titulo: @ViewBag.titulo
+descripcion: @ViewBag.descripcion
+fecha: @ViewBag.fecha
+finalizacion: @ViewBag.finalizada
+<form action='@Url.Action("crearTareaGuardar", "Account")' method="POST" enctype="application/x-www-form-urlencoded">
+    Ingrese el nuevo titulo de la tarea: <input type="text" name="titulo"/>
+    Ingrese la nueva descripcion de su tarea: <input type="text" name="descripcion"/>
+    Ingrese la nueva fecha de finalizacion de su tarea: <input type="date" name="finalizada"/>
+    <input type="submit" value="Guardar"/>
+</form>
+</section>
