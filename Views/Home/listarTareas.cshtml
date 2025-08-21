@@ -1,15 +1,17 @@
 @{
     ViewData["Title"] = "listarTareas";
 }
-@foreach(Tarea tarea in ViewBag.verTareas)
+@foreach(Tarea tarea in ViewBag.listaTareas)
 {
-    <h3>titulo: @tarea.titulo</h3>
+  <h3>titulo: @tarea.titulo</h3>
   <h3>descripcion: @tarea.descripcion</h3>
   <h3>fecha: @tarea.fecha</h3>
   <h3>finalizada: @tarea.finalizada</h3>
   <h3>IdUsuario: @tarea.idUsuario</h3>
+  <a href = '@Url.Action("editarTarea", "Home", new { idTarea = @tarea.id})'><h1>Editar tarea</h1></a>
+  <a href = '@Url.Action("eliminarTarea", "Home", new { idTarea = @tarea.id })"'><h1>Eliminar tarea</h1></a>
+  <a href = '@Url.Action("finalizarTarea", "Home", new { idTarea = @tarea.id})"'><h1>Finalizar tarea</h1></a>  
 }
-<a href = '@Url.Action("crearTarea", "Home")' alt="crear tarea"><h1>Crear tarea</h1></a>
-<a href = '@Url.Action("editarTarea", "Home")' alt="editar Tarea"><h1>Editar tarea</h1></a>
-<a href='@Url.Action("eliminarTarea", "Home", new { id = tarea.Id })"'><h1>Eliminar tarea</h1></a>
-<a href = '@Url.Action("Account", "Home")' alt="Cerrar sesion"><h1>Cerrar sesion</h1></a>
+  <a href = '@Url.Action("Account", "Home")' alt="Cerrar sesion"><h1>Cerrar sesion</h1></a>
+  <a href = '@Url.Action("crearTarea", "Home")' alt="crear tarea"><h1>Crear tarea</h1></a>
+
