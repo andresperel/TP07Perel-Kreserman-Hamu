@@ -51,10 +51,10 @@ public class HomeController : Controller
         ViewBag.tarea=tarea;
         return View("editarTarea");
     }
-    public IActionResult editarTareaGuardar(int idTarea, string titulo, string descripcion, DateTime fecha, bool finalizo)
+    public IActionResult editarTareaGuardar(int idTarea, string titulo, string descripcion, DateTime fecha)
     {
         int id= int.Parse(HttpContext.Session.GetString("id"));
-        BD.actualizarTarea(idTarea, titulo ,descripcion, fecha,finalizo);
+        BD.actualizarTarea(idTarea, titulo ,descripcion, fecha);
         return RedirectToAction("listarTareas", "Home");
     } 
 }

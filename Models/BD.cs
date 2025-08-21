@@ -77,12 +77,12 @@ public class BD
             }
             return tarea;
         }
-        public static void actualizarTarea(int idTarea, string titulo, string descripcion, DateTime fecha, bool finalizo)
+        public static void actualizarTarea(int idTarea, string titulo, string descripcion, DateTime fecha)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Tareas SET titulo = @titulo, descripcion=@descripcion, fecha = @fecha, finalizada = @finalizo WHERE id = @idTarea";
-                connection.QueryFirstOrDefault<Tarea>(query, new {idTarea});
+                string query = "UPDATE Tareas SET titulo = @titulo, descripcion=@descripcion, fecha = @fechaWHERE id = @idTarea";
+                connection.QueryFirstOrDefault<Tarea>(query, new {idTarea, titulo, descripcion, fecha});
 
             }
         }
