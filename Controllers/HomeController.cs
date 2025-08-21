@@ -28,7 +28,9 @@ public class HomeController : Controller
     public IActionResult crearTarea(){
         return View("crearTarea");
     }
-    public IActionResult crearTareaGuardar(string titulo, string descripcion, DateOnly fecha, bool finalizada){
+    
+    [HttpPost]
+    public IActionResult crearTareaGuardar(string titulo, string descripcion, DateTime fecha, bool finalizada){
         int id= int.Parse(HttpContext.Session.GetString("id"));
         Tarea tarea= new Tarea(titulo ,descripcion, fecha, finalizada, id);
         BD.crearTarea(tarea, id);
@@ -46,18 +48,14 @@ public class HomeController : Controller
     }
     public IActionResult editarTarea(int idTarea){
         Tarea tarea=BD.traerTareaACambiar(idTarea);
-        ViewBag.titulo=tarea.titulo;
-        ViewBag.descripcion=tarea.descripcion;
-        ViewBag.fecha=tarea.fecha;
-        ViewBag.finalizada=tarea.finalizada;
-        ViewBag.idUsuario=tarea.idUsuario;
+        ViewBag.tarea=tarea;
         return View("editarTarea");
     }
-/*    public IActionResult editarTareaGuardar(string pTitulo, string pDescripcion, DateOnly pFecha, bool pFinalizada, int pIdUsuario)
+    public IActionResult editarTareaGuardar(int idTarea, string titulo, string descripcion, DateTime fecha, bool finalizo, int idUsuario)
     {
         int id= int.Parse(HttpContext.Session.GetString("id"));
-        Tarea tarea= new Tarea(pTitulo ,pDescripcion, pFecha,pFinalizada, pIdUsuario);
+        Tarea tarea= new Tarea(titulo ,descripcion, fecha,finalizo, idTarea);
         BD.actualizarTarea(tarea);
+        return RedirectToAction("listarTareas", "Home");
     } 
-*/
 }

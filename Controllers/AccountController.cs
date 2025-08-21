@@ -23,7 +23,7 @@ public class AccountController : Controller
 
     public IActionResult cerrarSesion(){
         HttpContext.Session.SetString("id", 0.ToString());
-        return View("login");
+        return View("loginForm");
     }
     public IActionResult registrarse(){
         ViewBag.pude=true;

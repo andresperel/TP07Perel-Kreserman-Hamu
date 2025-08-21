@@ -11,7 +11,7 @@ public class BD
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             string query = "SELECT * FROM usuarios WHERE username = @username AND password = @password ";
-            usuario = connection.QueryFirstOrDefault<Usuario>(query, new { username , password });
+            usuario = connection.QueryFirstOrDefault<Usuario>(query, new { username, password });
 
         }
         return usuario.id;
@@ -53,17 +53,16 @@ public class BD
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Tareas (titulo,descripcion,fecha,finalizada,idUsuario)  VALUES (@titulo,@descripcion,@fecha,@finalizad,@idUsuario)";
+                string query = "INSERT INTO Tareas (titulo,descripcion,fecha,finalizada,idUsuario)  VALUES (@titulo,@descripcion,@fecha,@finalizada,@idUsuario)";
                 tarea = connection.QueryFirstOrDefault<Tarea>(query, new { titulo=tarea.titulo , descripcion= tarea.titulo ,fecha = tarea.fecha ,finalizada = tarea.finalizada,idUsuario = tarea.idUsuario});
             }
         }
         public static void eliminarTarea(int id)
         {
-            Tarea tarea = new Tarea();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "DELETE FROM Tareas WHERE id = @id  ";
-                tarea = connection.QueryFirstOrDefault<Tarea>(query, new { id });
+                string query = "DELETE FROM Tareas WHERE id = @id";
+                connection.QueryFirstOrDefault<Tarea>(query, new { id });
 
             }
         }
@@ -72,7 +71,7 @@ public class BD
             Tarea tarea = new Tarea();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM Tareas WHERE id = @id  ";
+                string query = "SELECT * FROM Tareas WHERE id = @id";
                 tarea = connection.QueryFirstOrDefault<Tarea>(query, new { id });
 
             }
@@ -82,18 +81,17 @@ public class BD
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Tareas SET tarea = @tarea WHERE id = @id  ";
-                tarea = connection.QueryFirstOrDefault<Tarea>(query, new {tarea.id});
+                string query = "UPDATE Tareas SET titulo = @tarea.titulo, descripcion=@tarea.descripcion, fecha = @tarea.fecha, finalizada = @tarea.finalizada WHERE id = @id";
+                connection.QueryFirstOrDefault<Tarea>(query, new {tarea.id});
 
             }
         }
         public static void finalizarTarea(int id)
         {
-            Tarea tarea = new Tarea();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Tareas SET finalizada = 1 WHERE id = @id  ";
-                tarea = connection.QueryFirstOrDefault<Tarea>(query, new {tarea.id});
+                string query = "UPDATE Tareas SET finalizada = 1 WHERE id = @id";
+                connection.QueryFirstOrDefault<Tarea>(query, new {id});
 
             }
         }
