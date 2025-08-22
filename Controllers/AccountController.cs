@@ -12,13 +12,16 @@ public class AccountController : Controller
     }
     [HttpPost]
     public IActionResult recibirLogin(string username, string password){
-        int id = BD.iniciarSesion(username, password);
-        if(id!=0){
-            HttpContext.Session.SetString("id", id.ToString());
-           return RedirectToAction("listarTareas", "Home");
-        } else{
-            return RedirectToAction("login", "Account");
-        }
+        if(username!=null && password!=null)
+        {
+            Usuario usuario = (BD.iniciarSesion(username, password));
+            if(usuario!=null){
+                HttpContext.Session.SetString("id", usuario.id.ToString());
+            return RedirectToAction("listarTareas", "Home");
+            } else{
+                return RedirectToAction("login", "Account");
+            }
+        } else{return RedirectToAction("login", "Account");}
     }
 
     public IActionResult cerrarSesion(){
@@ -26,16 +29,15 @@ public class AccountController : Controller
         return View("loginForm");
     }
     public IActionResult registrarse(){
-        ViewBag.pude=true;
         return View("registrarse");
     }
 
     public IActionResult recibirRegistro(string username, string password, string nombre, string apellido, string foto){
-        Usuario usuario=new Usuario(username, password, nombre, apellido, foto, DateTime.Now);
-        if(BD.registrar(usuario)){
+        if(username!=null && password!=null && nombre!=null && apellido!=null && foto!=null){
+            Usuario usuario=new Usuario(username, password, nombre, apellido, foto, DateTime.Now);
+            BD.registrar(usuario);
             return View("loginForm");
         } else{
-            ViewBag.pude=false;
             return View("registrarse");
         }
     }

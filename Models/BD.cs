@@ -5,7 +5,7 @@ public class BD
     private static string _connectionString = @"Server=localhost; 
     DataBase = TP07_KresermanHamuPerel; Integrated Security=True; TrustServerCertificate=True;";
 
-    public static int iniciarSesion(string username, string password)
+    public static Usuario iniciarSesion(string username, string password)
     {
         Usuario usuario = new Usuario();
         using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -14,26 +14,18 @@ public class BD
             usuario = connection.QueryFirstOrDefault<Usuario>(query, new { username, password });
 
         }
-        return usuario.id;
+        return usuario;
     }
 
-    public static bool registrar(Usuario usuario)
+    public static void registrar(Usuario usuario)
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            bool sePudo = false;
-            
+        {            
             if (usuario!= null)
             {
-
                 string query2 = "INSERT INTO  usuarios (username,password,nombre,apellido,foto,ultimoLogin) VALUES (@username,@password,@nombre,@apellido,@foto,@ultimoLogin)";
                 usuario = connection.QueryFirstOrDefault<Usuario>(query2, new { username = usuario.username, password = usuario.password,nombre=usuario.nombre,apellido=usuario.apellido,foto=usuario.foto,ultimoLogin=usuario.ultimoLogin });
-
-                sePudo = true;
             }
-
-            return sePudo;
-
         }
     }
     
@@ -81,7 +73,7 @@ public class BD
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Tareas SET titulo = @titulo, descripcion=@descripcion, fecha = @fechaWHERE id = @idTarea";
+                string query = "UPDATE Tareas SET titulo = @titulo, descripcion=@descripcion, fecha =@fecha WHERE id = @idTarea";
                 connection.QueryFirstOrDefault<Tarea>(query, new {idTarea, titulo, descripcion, fecha});
 
             }

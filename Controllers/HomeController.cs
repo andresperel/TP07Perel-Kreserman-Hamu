@@ -32,9 +32,12 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult crearTareaGuardar(string titulo, string descripcion, DateTime fecha, bool finalizada){
         int id= int.Parse(HttpContext.Session.GetString("id"));
-        Tarea tarea= new Tarea(titulo ,descripcion, fecha, finalizada, id);
-        BD.crearTarea(tarea, id);
-        return RedirectToAction("listarTareas", "Home");
+        if(titulo !=null&& descripcion !=null&& fecha !=null&& finalizada !=null){
+            Tarea tarea= new Tarea(titulo ,descripcion, fecha, finalizada, id);
+            BD.crearTarea(tarea, id);
+            return RedirectToAction("listarTareas", "Home");
+        }
+        return View("crearTarea");
     }
 
     public IActionResult finalizarTarea(int idTarea){
@@ -54,7 +57,12 @@ public class HomeController : Controller
     public IActionResult editarTareaGuardar(int idTarea, string titulo, string descripcion, DateTime fecha)
     {
         int id= int.Parse(HttpContext.Session.GetString("id"));
-        BD.actualizarTarea(idTarea, titulo ,descripcion, fecha);
-        return RedirectToAction("listarTareas", "Home");
+        if(idTarea != null&& titulo != null&& descripcion!= null&& fecha!= null){
+            BD.actualizarTarea(idTarea, titulo ,descripcion, fecha);
+            return RedirectToAction("listarTareas", "Home");
+        } else{
+            return RedirectToAction("editarTarea", "Home");
+        }
+
     } 
 }
